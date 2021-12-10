@@ -98,7 +98,7 @@
 	    <repository>
 	      <id>nexus</id>
 	      <name>usha</name>
-	      <url>http://13.232.219.13:8084/usha/repository/project-snapshot/</url>
+	      <url>http://13.232.219.13:8084/usha/repository/project1-release/</url>
 	    </repository>
 	    
 	    <snapshotRepository>
