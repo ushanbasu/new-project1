@@ -1,6 +1,6 @@
 node
 {
-def mavenHome = tool name: "maven 3.8.4"
+def mavenHome = tool name: "maven-3.8.4"
 stage ('github pulling')
 {
 git branch: 'main', url: 'https://github.com/ushanbasu/new-project1.git'
