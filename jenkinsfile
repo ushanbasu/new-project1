@@ -1,0 +1,50 @@
+pipeline
+{
+    agent any
+    tools
+    {
+        maven "maven 3.8.4"
+    }
+    stages
+    {
+        stage ('github pull')
+        {
+            steps
+            {
+                git branch: 'main', url: 'https://github.com/ushanbasu/new-project1.git'
+            }
+            
+        }
+        stage ('build')
+        {
+            steps
+            {
+                sh "mvn clean package"
+            }
+        }
+        stage ('sonar')
+        {
+            steps
+            {
+                sh "mvn clean sonar:sonar"
+            }
+        }
+        stage ('nexus')
+        {
+            steps
+            {
+                sh "mvn clean sonar:sonar deploy"
+            }
+        }
+        stage ('tomcat')
+        {
+            steps
+            {
+              sshagent(['6a69d56a-6979-4edf-b7b1-fb53f6015975'])
+              {
+                   sh "scp -o StrictHostKeyChecking=no target/maven-web-application.war ec2-user@13.232.250.150:/opt/apache-tomcat-9.0.56/webapps"
+              }
+            }
+        }
+    }
+    }
